@@ -89,7 +89,11 @@ def add_router():
         password = request.form.get("password")
 
         if ip and username and password:
-            router_data = {"ip": ip, "username": username, "password": password}
+            router_data = {
+                "ip": ip,
+                "username": username,
+                "password": password,
+            }
             routers_collection.insert_one(router_data)
             socketio.emit("router_added", router_data, broadcast=True)
     except Exception as e:
@@ -129,5 +133,9 @@ def get_routers():
 
 if __name__ == "__main__":
     socketio.run(
-        sample, host="0.0.0.0", port=8080, debug=True, allow_unsafe_werkzeug=True
+        sample,
+        host="0.0.0.0",
+        port=8080,
+        debug=True,
+        allow_unsafe_werkzeug=True,
     )
